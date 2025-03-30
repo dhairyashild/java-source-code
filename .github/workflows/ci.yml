@@ -1,10 +1,10 @@
 name: springboot
 
 on: 
-  -push
+  - push
 
 jobs:
-  Building docker:
+  Building-docker:
         runs-on: ubuntu:latest
         steps:
           - name: checkout
