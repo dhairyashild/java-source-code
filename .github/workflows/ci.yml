@@ -1,16 +1,26 @@
-name: springboot
+name: CI/CD Pipeline
 
-on: 
-  - push
+# Trigger configurations (choose as needed)
+on:
+  # Standard push/pull request triggers
+  push:
+    branches: [ "main", "dev" ]
+    paths:
+      - '**.java'
+      - 'pom.xml'
+      - '.github/workflows/**'
+      - 'src/**'
 
 jobs:
-  Building-docker:
-        runs-on: ubuntu-latest
-        steps:
-          - name: checkout
-            uses: actions/checkout@v4
-          - name: Setup Maven Action
-            uses: s4u/setup-maven-action@v2
-          - run: mvn -V ...
+  job1:
+    runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - uses: actions/setup-java@v4
+          with:
+              distribution: 'temurin'
+              java-version: '21'
+              cache: 'maven'
+        - name: build
+          run: mvn clean package
         
-  
