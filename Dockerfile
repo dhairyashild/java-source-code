@@ -1,14 +1,16 @@
-# Use OpenJDK 11 as the base image
-FROM openjdk:11-jre-slim
-
-# Set the working directory in the container
+# Build Stage
+FROM maven:3.8.6-jdk-11 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the compiled JAR file into the container at /app
-COPY ./target/spring-boot-web.jar /app
-
-# Expose port 8080 to the outside world
-EXPOSE 8082
-
-# Command to run the Spring Boot application
-CMD ["java", "-jar", "spring-boot-web.jar"]
+# Runtime Stage
+FROM amazoncorretto:11-alpine
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
+RUN addgroup -S mygroup && adduser -S myuser -G mygroup
+USER myuser
+EXPOSE 8080
+ENV SPRING_PROFILES_ACTIVE=prod
+CMD ["java", "-jar", "app.jar"]
