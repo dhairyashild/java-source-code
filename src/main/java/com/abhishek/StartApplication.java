@@ -17,9 +17,23 @@ public class StartApplication {
     @GetMapping("/")
     public String index(final Model model) {
         logger.info("Accessed / endpoint");
-        model.addAttribute("title", "This is a SpringBoot Static Web Application deployed on container by DHAIRYASHIL DESAI");
-        model.addAttribute("poemTitle", "My favourite poem is:");
-        model.addAttribute("poem", "O Captain! My Captain!\nOur fearful trip is done,\nThe ship has weather’d every rack,\nThe prize we sought is won.");
+        model.addAttribute("title", "🚀 SpringBoot WebApp on AWS EKS - By DHAIRYASHIL DESAI 🚀");
+        
+        // DevOps Tools & Services Information with emojis
+        model.addAttribute("devopsTitle", "🛠️ DevOps Stack Powering This Application:");
+        model.addAttribute("services", new String[]{
+            "🔷 Jenkins (CI/CD Pipeline)",
+            "🟠 Maven (Build Automation)", 
+            "🔵 SonarQube (Code Quality)",
+            "🐳 Docker (Containerization)",
+            "📦 Amazon ECR (Container Registry)",
+            "⚙️ Kubernetes (K8s Orchestration)",
+            "☁️ Amazon EKS (Managed K8s)",
+            "📊 AWS CloudWatch (Monitoring & Logs)",
+            "🔐 AWS IAM (Access Management)",
+            "🛡️ AWS WAF (Web Application Firewall)"
+        });
+        
         return "index";
     }
 
