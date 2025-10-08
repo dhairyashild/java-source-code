@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${title}">Default Title</title>
+    <title>SpringBoot AWS EKS App</title>
+    <meta charset="UTF-8">
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .title { 
+            color: #2c3e50; 
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .devops-section { 
+            margin-top: 30px; 
+        }
+        .service-item { 
+            margin: 8px 0; 
+            padding: 12px;
+            background: #f8f9fa; 
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+    </style>
 </head>
 <body>
-    <h1 th:text="${title}"></h1>
-    
-    <h2 th:text="${poemTitle}"></h2>
-    <pre th:text="${poem}"></pre>
+    <div class="container">
+        <div class="title">
+            <h1 th:text="${title}">Default Title</h1>
+        </div>
+        
+        <div class="devops-section" th:if="${devopsTitle}">
+            <h2 th:text="${devopsTitle}">DevOps Stack</h2>
+            <div th:if="${services}">
+                <div class="service-item" th:each="service : ${services}">
+                    <span th:text="${service}">Service Name</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
